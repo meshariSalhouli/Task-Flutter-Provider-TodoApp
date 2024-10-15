@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/provider/todo_provider.dart';
 
 class AddPage extends StatelessWidget {
   AddPage({Key? key}) : super(key: key);
@@ -31,7 +33,14 @@ class AddPage extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                final todoProvider =
+                    Provider.of<TodoProvider>(context, listen: false);
+                todoProvider.addtodo(
+                  title: todoController.text,
+                );
+                GoRouter.of(context).pop();
+              },
               style: ButtonStyle(
                 backgroundColor:
                     MaterialStateProperty.all<Color>(Colors.amber.shade300),
